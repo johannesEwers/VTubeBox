@@ -78,6 +78,13 @@ SOLUTION: Do not use a bluetooth headphone/in-ear microphone under Windows.
           I do not found any other solution for this. Windows audio drivers sucks...
           I cannot change Microsoft's bad audio support or Godot's WASAPI-only support.
 
+### Why is my audio level going to reduced, when I speak?
+As far as I know, this is a Windows/Realtek audio driver thing. I do not really 
+know why this happens.
+
+SOLUTION: Install and use Microsoft's default audio driver. Worked for me, until
+the next updates...
+
 ## Feature ideas
 - Live Cam Support
 - Face expressions and gestures running over hotkeys (Stage 1)
