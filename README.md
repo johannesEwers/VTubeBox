@@ -6,7 +6,7 @@ F1: Opens the settings menu
 ## 2D Models
 
 ### Disclaimer
-All 2D modell feature are currently in development.
+All 2D model features are currently in development.
 
 ### Requirement: Sprite Sheet
 0. Layer: Background textures with shadows
