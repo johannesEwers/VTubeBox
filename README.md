@@ -51,8 +51,9 @@ Currently not in development. Maybe in the future.
 ## FAQ
 
 ### My condenser microphone do not work. Does the app use the microphone on my audio interface?
-It does, but Godot always use the first source it founds. Check where your
+It does, but Godot always use the first (default) source it founds. Check where your
 mic is connected.
+
 SOLUTION: If it is in IN2, connect it with IN1 instead. Solved it for me as
 much as I can say.
 
@@ -61,6 +62,7 @@ You need to set your device as default input device (mostly speaker icon on
 the right side of the tasbar).
 Also it seems Godot only support WASAPI/WDM input devices on Windows. If
 OBS grabs your microphone, other apps can not use it at the same time.
+
 SOLUTION: Try a second USB- or 3.5-mm-jack-microphone just for this app instead.
 
 ### Why does my model react on every sound?
@@ -71,6 +73,7 @@ To prevent reactions by noise, a noise gate filter is configurated and tested.
 ### Why is the sound weird (mono) after the app runs?
 You're probably using bluetooth heaphones. Windows switches it into "Hands Free 
 Mode" (Freisprechtelefonie) and causes that behavior after running the program.
+
 SOLUTION: Do not use a bluetooth headphone/in-ear microphone under Windows.
           I do not found any other solution for this. Windows audio drivers sucks...
           I cannot change Microsoft's bad audio support or Godot's WASAPI-only support.
