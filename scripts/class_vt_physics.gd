@@ -16,23 +16,23 @@ func collect_sprite_nodes(root: Node) -> void:
 	for child in root.get_children():
 		if child is Node:
 			collect_sprite_nodes(child)
-	if Globals.is_debug_mode: print("List Node: ", root)
+	if Settings.is_debug_mode: print("List Node: ", root)
 
 
 func collect_sprite_positions(arr: Array) -> void:
 	for s in arr:
 		sprite_origins_pos[s] = s.position
-		if Globals.is_debug_mode: print("Sprite Positions: ", sprite_origins_pos[s])
+		if Settings.is_debug_mode: print("Sprite Positions: ", sprite_origins_pos[s])
 
 
 func draw_flat_physics(delta, bus_idx: int) -> void:
 	var l_db = VTAudio.calculate_peak_ratio(bus_idx)
-	if Globals.is_debug_mode: print("l_db: ", l_db, " | RAW db: ", AudioServer.get_bus_peak_volume_left_db(bus_idx, 0), " | THRESHOLD: ", Globals.THRESHOLD_DB)
+	if Settings.is_debug_mode: print("l_db: ", l_db, " | RAW db: ", AudioServer.get_bus_peak_volume_left_db(bus_idx, 0), " | THRESHOLD: ", Settings.THRESHOLD_DB)
 	
 	# If sound appears, the images shakes:
-	if Globals.flag_shuffle:
-		if AudioServer.get_bus_peak_volume_left_db(bus_idx, 0) > Globals.THRESHOLD_DB: # Shaking
-			var off = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * Globals.max_shuffle_px * l_db 
+	if Settings.flag_shuffle:
+		if AudioServer.get_bus_peak_volume_left_db(bus_idx, 0) > Settings.THRESHOLD_DB: # Shaking
+			var off = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * Settings.max_shuffle_px * l_db 
 			# Use on all sprites:
 			for s in sprite_list:
 				s.position = sprite_origins_pos[s] + off
@@ -40,10 +40,10 @@ func draw_flat_physics(delta, bus_idx: int) -> void:
 			for s in sprite_list:
 				s.position = s.position.lerp(sprite_origins_pos[s], 5 * delta)
 	# If no sound appears, the images fading into a grayscale and vice versa:
-	if Globals.flag_fading:
-		if AudioServer.get_bus_peak_volume_left_db(bus_idx, 0) > Globals.THRESHOLD_DB: # Coloring
+	if Settings.flag_fading:
+		if AudioServer.get_bus_peak_volume_left_db(bus_idx, 0) > Settings.THRESHOLD_DB: # Coloring
 			for s in sprite_list:
-				s.modulate = s.modulate.lerp(Globals.REGULAR_TINT, Globals.tint_speed * delta)
+				s.modulate = s.modulate.lerp(Settings.REGULAR_TINT, Settings.tint_speed * delta)
 		else: # Fading
 			for s in sprite_list:
-				s.modulate = s.modulate.lerp(Globals.FADE_TINT, Globals.tint_speed * delta)
+				s.modulate = s.modulate.lerp(Settings.FADE_TINT, Settings.tint_speed * delta)
