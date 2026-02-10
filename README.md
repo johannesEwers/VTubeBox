@@ -1,5 +1,11 @@
 # VTubeBox
 
+## Godot Version
+This project works with Godot v4.5+. Lower versions may not be working properly.
+
+## Opening Project
+Just open the project folder via Godot's project view.
+
 ## Controlls
 F1: Opens the settings menu
 
