@@ -86,6 +86,7 @@ SOLUTION: Install and use Microsoft's default audio driver. Worked for me, until
 the next updates...
 
 ## Feature ideas
+- Analyzes live microphone input by computing frequency-band energy and selecting the most energetic (dominant) frequency band for downstream use.
 - Live Cam Support
 - Face expressions and gestures running over hotkeys (Stage 1)
 - Automatically face expressions and gestures (Stage 2)
