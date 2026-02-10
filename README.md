@@ -97,3 +97,6 @@ the next updates...
 - Face expressions and gestures running over hotkeys (Stage 1)
 - Automatically face expressions and gestures (Stage 2)
 - Whole model needs to be flippable on its y-axis by a hotkey for convenience
+
+## Art Refs
+ChatGPT 4:	icon.svg
