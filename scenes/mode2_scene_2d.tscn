@@ -1,0 +1,229 @@
+[gd_scene format=3 uid="uid://ogwnj00165xq"]
+
+[sub_resource type="Resource" id="Resource_t7d7c"]
+metadata/__load_path__ = "res://scripts/main_2d.gd"
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_yqsc4"]
+
+[sub_resource type="Resource" id="Resource_yd62g"]
+metadata/__load_path__ = "res://scripts/vu_meter_2d.gd"
+
+[sub_resource type="Resource" id="Resource_nhodq"]
+metadata/__load_path__ = "res://scripts/window_2d.gd"
+
+[sub_resource type="GDScript" id="GDScript_yqsc4"]
+script/source = "# PHYSICS (TOOLS)
+extends Control
+
+
+
+
+
+
+
+#func _ready() -> void:
+#	var mic_stream = AudioStreamMicrophone.new()
+#	var mic_player = AudioStreamPlayer.new()
+#	mic_player.stream = mic_stream
+#	mic_player.bus = \"Mic\"
+#	add_child(mic_player)
+#	mic_player.play()
+#	
+#	_collect_sprite_nodes(self)
+#	_collect_sprite_positions(sprite_list)
+#	randomize() # For the randf_range operations
+#
+#func _process(delta: float) -> void:
+#	
+##	var data = mic.get_audio_buffer()
+##	if data.size() > 0:
+##		var peak = 0.0
+##		for v in data:
+##			peak = max(peak, abs(v))
+##		print(\"Peak level: \", peak)
+#
+#
+#	var bus_idx = VTAudio.get_bus_index(\"Mic\")
+#	var db = AudioServer.get_bus_peak_volume_left_db(bus_idx, 0)
+#	var level = db_to_linear(db)  # Skaliert dB zu 0‒1
+#	
+#	if Globals.flag_shuffle:
+#		if db > Globals.THRESHOLD_DB:
+#			var off = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * Globals.max_shuffle_px * level
+#			for s in sprite_list:
+#				s.position = sprite_origins_pos[s] + off
+#		else:
+#			for s in sprite_list:
+#				s.position = s.position.lerp(sprite_origins_pos[s], 5 * delta)
+#	
+#	if Globals.flag_fading:
+#		if db > Globals.THRESHOLD_DB:
+#			for s in sprite_list:
+#				s.modulate = s.modulate.lerp(REGULAR_TINT, Globals.tint_speed * delta)
+#		else:
+#			for s in sprite_list:
+#				s.modulate = s.modulate.lerp(FADE_TINT, Globals.tint_speed * delta)
+#	
+##	var linear  = db_to_linear(db)
+#	
+#	# If sound appears, the images shakes:
+##	if Globals.flag_shuffle:
+##		if AudioServer.get_bus_peak_volume_left_db(bus_idx, 0) > Globals.THRESHOLD_DB: # Shaking
+###			var level := db_to_linear(db) # 0‒1
+##			var off = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * Globals.max_shuffle_px * db 
+##			# Use on all sprites:
+##			for s in sprite_list:
+##				s.position = sprite_origins_pos[s] + off
+##		else: # Stopp shaking
+##			for s in sprite_list:
+##				s.position = s.position.lerp(sprite_origins_pos[s], 5 * delta)
+##	# If no sound appears, the images fading into a grayscale and vice versa:
+##	if Globals.flag_fading:
+##		if AudioServer.get_bus_peak_volume_left_db(bus_idx, 0) > Globals.THRESHOLD_DB: # Coloring
+##			for s in sprite_list:
+##				s.modulate = s.modulate.lerp(REGULAR_TINT, Globals.tint_speed * delta)
+##		else: # Fading
+##			for s in sprite_list:
+##				s.modulate = s.modulate.lerp(FADE_TINT, Globals.tint_speed * delta)
+#
+"
+
+[sub_resource type="Resource" id="Resource_myapx"]
+metadata/__load_path__ = "res://model_assets/my_avatar.png"
+
+[sub_resource type="Resource" id="Resource_rcbni"]
+metadata/__load_path__ = "res://model_assets/default_fullbody.png"
+
+[node name="TemplateVTubingScene2D" type="Node2D"]
+script = SubResource("Resource_t7d7c")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMicrophone_yqsc4")
+autoplay = true
+bus = &"Mic"
+
+[node name="DebugMeter" type="Control" parent="."]
+light_mask = 512
+visibility_layer = 512
+layout_mode = 3
+offset_left = 5.0
+offset_top = 950.0
+offset_right = 5.0
+offset_bottom = 950.0
+script = SubResource("Resource_yd62g")
+
+[node name="SettingsWindow" type="Window" parent="."]
+oversampling_override = 1.0
+position = Vector2i(10, 36)
+size = Vector2i(700, 1230)
+script = SubResource("Resource_nhodq")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SettingsWindow"]
+anchors_preset = -1
+offset_right = 700.0
+offset_bottom = 1219.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsWindow/ScrollContainer"]
+layout_mode = 2
+
+[node name="ChkAvatarMode" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Avatar Mode:
+If you want just an little image"
+
+[node name="ChkFullbodyMode" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fullbody Mode:
+If you want to use a full body model"
+
+[node name="ChkShaking" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Toggles shaking effect"
+
+[node name="LabelSliderShakingValue" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Max shaking effect value (default: 20):"
+
+[node name="HSliderShakingValue" type="HSlider" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ChkFading" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Toggle fading effect"
+
+[node name="ChkVU" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Debug: Toggles an VU meter"
+
+[node name="ChkVUDebug" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Debug: Prints the values for VU meter (dB, linear values, norm level values)"
+
+[node name="Separator" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelLicense" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="AnimationPlayerNode2D" type="Node2D" parent="."]
+
+[node name="AnimationPlayerHeadX" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
+
+[node name="AnimationPlayerHeadY" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
+
+[node name="AnimationPlayerCharacter" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
+
+[node name="AnimationPlayerEyes" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
+
+[node name="AnimationPlayerMouth" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
+
+[node name="AnimationPlayerDetails" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
+
+[node name="TexturesNode2D" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 360.0
+offset_top = 640.0
+offset_right = 360.0
+offset_bottom = 640.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_yqsc4")
+
+[node name="AvatarBoxSprite2D" type="Sprite2D" parent="TexturesNode2D"]
+texture = SubResource("Resource_myapx")
+
+[node name="FullbodySprite2D" type="Sprite2D" parent="TexturesNode2D"]
+texture = SubResource("Resource_rcbni")
+
+[node name="BackTexturesNode2D" type="Node2D" parent="TexturesNode2D"]
+light_mask = 8
+visibility_layer = 8
+
+[node name="BodyTexturesNode2D" type="Node2D" parent="TexturesNode2D"]
+light_mask = 16
+visibility_layer = 16
+
+[node name="ClothesTexturesNode2D" type="Node2D" parent="TexturesNode2D"]
+light_mask = 32
+visibility_layer = 32
+
+[node name="OnTopAccessoriesTexturesNode2D" type="Node2D" parent="TexturesNode2D"]
+light_mask = 64
+visibility_layer = 64
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkAvatarMode" to="SettingsWindow" method="_on_chk_avatar_mode_pressed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkFullbodyMode" to="SettingsWindow" method="_on_chk_fullbody_mode_pressed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkShaking" to="SettingsWindow" method="_on_chk_shaking_pressed"]
+[connection signal="value_changed" from="SettingsWindow/ScrollContainer/VBoxContainer/HSliderShakingValue" to="SettingsWindow" method="_on_h_slider_shaking_value_value_changed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkFading" to="SettingsWindow" method="_on_chk_fading_pressed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkVU" to="SettingsWindow" method="_on_chk_vu_pressed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkVUDebug" to="SettingsWindow" method="_on_chk_vu_debug_pressed"]

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://bqwpwpl6gkdt5"]
+
+[node name="UIScene2D" type="Node2D" unique_id=1055629214]
+
+[node name="DebugMeter" type="Control" parent="." unique_id=1896919459]
+light_mask = 512
+visibility_layer = 512
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 950.0
+offset_right = 5.0
+offset_bottom = 950.0
+
+[node name="SettingsWindow" type="Window" parent="." unique_id=458344936]
+oversampling_override = 1.0
+position = Vector2i(10, 36)
+size = Vector2i(700, 1230)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SettingsWindow" unique_id=1934714180]
+offset_right = 700.0
+offset_bottom = 1219.0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsWindow/ScrollContainer" unique_id=149693194]
+layout_mode = 2
+
+[node name="ChkAvatarMode" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=912628891]
+layout_mode = 2
+text = "Avatar Mode:
+If you want just an little image"
+
+[node name="ChkFullbodyMode" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=2052984639]
+layout_mode = 2
+text = "Fullbody Mode:
+If you want to use a full body model"
+
+[node name="ChkShaking" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=737813138]
+layout_mode = 2
+text = "Toggles shaking effect"
+
+[node name="LabelSliderShakingValue" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=1462653942]
+layout_mode = 2
+text = "Max shaking effect value (default: 20):"
+
+[node name="HSliderShakingValue" type="HSlider" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=1832847683]
+layout_mode = 2
+
+[node name="ChkFading" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=2022570440]
+layout_mode = 2
+text = "Toggle fading effect"
+
+[node name="ChkVU" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=232297661]
+layout_mode = 2
+text = "Debug: Toggles an VU meter"
+
+[node name="ChkVUDebug" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=300055530]
+layout_mode = 2
+text = "Debug: Prints the values for VU meter (dB, linear values, norm level values)"
+
+[node name="Separator" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=707209897]
+layout_mode = 2
+
+[node name="LabelLicense" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=1972965667]
+layout_mode = 2
+autowrap_mode = 2
+
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkAvatarMode" to="SettingsWindow" method="_on_chk_avatar_mode_pressed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkFullbodyMode" to="SettingsWindow" method="_on_chk_fullbody_mode_pressed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkShaking" to="SettingsWindow" method="_on_chk_shaking_pressed"]
+[connection signal="value_changed" from="SettingsWindow/ScrollContainer/VBoxContainer/HSliderShakingValue" to="SettingsWindow" method="_on_h_slider_shaking_value_value_changed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkFading" to="SettingsWindow" method="_on_chk_fading_pressed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkVU" to="SettingsWindow" method="_on_chk_vu_pressed"]
+[connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkVUDebug" to="SettingsWindow" method="_on_chk_vu_debug_pressed"]
