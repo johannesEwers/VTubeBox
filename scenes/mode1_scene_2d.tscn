@@ -1,10 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d2evyutpyyei4"]
-
-[ext_resource type="Script" uid="uid://8pjne0uyth36" path="res://scripts/main_2d.gd" id="1_yqsc4"]
-[ext_resource type="Texture2D" uid="uid://b51cqym83xui" path="res://model_assets/default_fullbody.png" id="2_mbf8l"]
-[ext_resource type="Script" uid="uid://c3yyh1p78mjfi" path="res://scripts/vu_meter_2d.gd" id="4_nwnwl"]
-[ext_resource type="Script" uid="uid://dq1hc6x4xfil8" path="res://scripts/window_2d.gd" id="4_qxiw5"]
-[ext_resource type="Texture2D" uid="uid://obpcjmyv2qaa" path="res://model_assets/my_avatar.png" id="7_iqapw"]
+[gd_scene format=3 uid="uid://d2evyutpyyei4"]
 
 [sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_yqsc4"]
 
@@ -85,96 +79,79 @@ extends Control
 #
 "
 
-[node name="TemplateVTubingScene2D" type="Node2D"]
-script = ExtResource("1_yqsc4")
+[node name="TemplateVTubingScene2D" type="Node2D" unique_id=1218236524]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2133631024]
 stream = SubResource("AudioStreamMicrophone_yqsc4")
 autoplay = true
-bus = &"Mic"
 
-[node name="DebugMeter" type="Control" parent="."]
+[node name="DebugMeter" type="Control" parent="." unique_id=813031492]
 light_mask = 512
 visibility_layer = 512
 layout_mode = 3
+anchors_preset = 0
 offset_left = 5.0
 offset_top = 950.0
 offset_right = 5.0
 offset_bottom = 950.0
-script = ExtResource("4_nwnwl")
 
-[node name="SettingsWindow" type="Window" parent="."]
+[node name="SettingsWindow" type="Window" parent="." unique_id=1137507862]
 oversampling_override = 1.0
 position = Vector2i(10, 36)
 size = Vector2i(700, 1230)
-script = ExtResource("4_qxiw5")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="SettingsWindow"]
-anchors_preset = -1
+[node name="ScrollContainer" type="ScrollContainer" parent="SettingsWindow" unique_id=1660458948]
 offset_right = 700.0
 offset_bottom = 1219.0
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsWindow/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsWindow/ScrollContainer" unique_id=1030982046]
 layout_mode = 2
 
-[node name="ChkAvatarMode" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="ChkAvatarMode" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=206506917]
 layout_mode = 2
 text = "Avatar Mode:
 If you want just an little image"
 
-[node name="ChkFullbodyMode" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="ChkFullbodyMode" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=2133821404]
 layout_mode = 2
 text = "Fullbody Mode:
 If you want to use a full body model"
 
-[node name="ChkShaking" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="ChkShaking" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=917466069]
 layout_mode = 2
 text = "Toggles shaking effect"
 
-[node name="LabelSliderShakingValue" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="LabelSliderShakingValue" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=1613157462]
 layout_mode = 2
 text = "Max shaking effect value (default: 20):"
 
-[node name="HSliderShakingValue" type="HSlider" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="HSliderShakingValue" type="HSlider" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=1504329021]
 layout_mode = 2
 
-[node name="ChkFading" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="ChkFading" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=870457299]
 layout_mode = 2
 text = "Toggle fading effect"
 
-[node name="ChkVU" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="ChkVU" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=85915681]
 layout_mode = 2
 text = "Debug: Toggles an VU meter"
 
-[node name="ChkVUDebug" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="ChkVUDebug" type="CheckBox" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=1683658718]
 layout_mode = 2
 text = "Debug: Prints the values for VU meter (dB, linear values, norm level values)"
 
-[node name="Separator" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="Separator" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=224705911]
 layout_mode = 2
 
-[node name="LabelLicense" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer"]
+[node name="LabelLicense" type="Label" parent="SettingsWindow/ScrollContainer/VBoxContainer" unique_id=1553920744]
 layout_mode = 2
 autowrap_mode = 2
 
-[node name="AnimationPlayerNode2D" type="Node2D" parent="."]
-
-[node name="AnimationPlayerHeadX" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
-
-[node name="AnimationPlayerHeadY" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
-
-[node name="AnimationPlayerCharacter" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
-
-[node name="AnimationPlayerEyes" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
-
-[node name="AnimationPlayerMouth" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
-
-[node name="AnimationPlayerDetails" type="AnimationPlayer" parent="AnimationPlayerNode2D"]
-
-[node name="TexturesNode2D" type="Control" parent="."]
+[node name="TexturesNode2D" type="Control" parent="." unique_id=888265293]
 layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -187,29 +164,25 @@ grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_yqsc4")
 
-[node name="AvatarBoxSprite2D" type="Sprite2D" parent="TexturesNode2D"]
-texture = ExtResource("7_iqapw")
+[node name="AvatarBoxSprite2D" type="Sprite2D" parent="TexturesNode2D" unique_id=574532231]
 
-[node name="FullbodySprite2D" type="Sprite2D" parent="TexturesNode2D"]
-texture = ExtResource("2_mbf8l")
+[node name="FullbodySprite2D" type="Sprite2D" parent="TexturesNode2D" unique_id=2004921647]
 
-[node name="BackTexturesNode2D" type="Node2D" parent="TexturesNode2D"]
+[node name="BackTexturesNode2D" type="Node2D" parent="TexturesNode2D" unique_id=1588306286]
 light_mask = 8
 visibility_layer = 8
 
-[node name="BodyTexturesNode2D" type="Node2D" parent="TexturesNode2D"]
+[node name="BodyTexturesNode2D" type="Node2D" parent="TexturesNode2D" unique_id=1862548305]
 light_mask = 16
 visibility_layer = 16
 
-[node name="ClothesTexturesNode2D" type="Node2D" parent="TexturesNode2D"]
+[node name="ClothesTexturesNode2D" type="Node2D" parent="TexturesNode2D" unique_id=597580027]
 light_mask = 32
 visibility_layer = 32
 
-[node name="OnTopAccessoriesTexturesNode2D" type="Node2D" parent="TexturesNode2D"]
+[node name="OnTopAccessoriesTexturesNode2D" type="Node2D" parent="TexturesNode2D" unique_id=939279832]
 light_mask = 64
 visibility_layer = 64
-
-[node name="Skeleton2D" type="Skeleton2D" parent="."]
 
 [connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkAvatarMode" to="SettingsWindow" method="_on_chk_avatar_mode_pressed"]
 [connection signal="pressed" from="SettingsWindow/ScrollContainer/VBoxContainer/ChkFullbodyMode" to="SettingsWindow" method="_on_chk_fullbody_mode_pressed"]
